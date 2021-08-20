@@ -1,10 +1,11 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
 #define XF86MonBrightnessDown 0x1008ff03
 #define XF86MonBrightnessUp 0x1008ff02
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int default_border = 0;  // to switch back to default border after dynamic border resizing via keybinds
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
@@ -27,7 +28,7 @@ static const int vertpadtab         = 33;
 static const int horizpadtabi       = 15;
 static const int horizpadtabo       = 15;
 static const int scalepreview       = 4;
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=10",
+static const char *fonts[]          = { "UbuntuMono Nerd Font Mono:style:medium:size=12",
                                         "Material Design Icons-Regular:size=10",
                                       };
 static const char dmenufont[]       = "monospace:size=10";
@@ -77,15 +78,22 @@ static const unsigned int ulinestroke	= 2;	/* thickness / height of the underlin
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
+static const char *upvol[]   = { "amixer", "-D", "pulse", "sset", "Master", "5%+",    NULL };
+static const char *downvol[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-",    NULL };
+static const char *mutevol[] = { "amixer", "-D", "pulse", "set", "Master", "+1",      "toggle" };
+
 static const Rule rules[] = {
     /* xprop(1):
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title
      */
-       	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           0,           -1 },
-      	{ "feh",      NULL,       NULL,       0,            0,           1,           -1 },
+       	/* class      instance    title                     tags mask     iscentered   isfloating   monitor */
+	{ "Gimp",     NULL,       NULL,                     0,            0,           1,           -1 },
+	{ "Firefox",  NULL,       NULL,                     1 << 8,       0,           0,           -1 },
+      	{ "feh",      NULL,       NULL,                     0,            0,           1,           -1 },
+	{ NULL,       NULL,       "Picture in picture",     0,            1,            -1 },
+	{ "TelegramDesktop", NULL,NULL,         1 << 3,       0,            -1 },
+	{ "discord",  NULL,       NULL,                     1 << 3,       0,            -1 },
 };
 
 /* layout(s) */
@@ -224,7 +232,9 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_r,      quit,           {1} },
     { MODKEY,                       XK_e,      hidewin,        {0} },
     { MODKEY|ShiftMask,             XK_e,      restorewin,     {0} },
-
+    { 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+    { 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
+    { 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
 };
 
 /* button definitions */
