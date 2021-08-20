@@ -14,9 +14,9 @@ update_icon() {
 }
 
 pkg_updates() {
-  updates=$(doas xbps-install -un | wc -l) # void
+  # updates=$(doas xbps-install -un | wc -l) # void
   # updates=$(checkupdates | wc -l)   # arch , needs pacman contrib
-  # updates=$(aptitude search '~U' | wc -l)  # apt (ubuntu,debian etc)
+  updates=$(aptitude search '~U' | wc -l)  # apt (ubuntu,debian etc)
 
   if [ -z "$updates" ]; then
     printf "^c#94af7d^ Fully Updated"
@@ -56,7 +56,7 @@ wlan() {
 
 clock() {
   printf "^c#2E3440^ ^b#828dd1^ 󱑆 "
-  printf "^c#2E3440^^b#6c77bb^ $(date '+%a, %I:%M %p') "
+  printf "^c#2E3440^^b#6c77bb^ $(date '+%a, %H:%M %p') "
 }
 
 while true; do
