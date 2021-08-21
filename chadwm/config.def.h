@@ -171,6 +171,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
+    { MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock") },
 
     // overall gaps
     { MODKEY|ControlMask,           XK_i,      incrgaps,       {.i = +1 } },
