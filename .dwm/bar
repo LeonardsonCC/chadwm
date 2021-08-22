@@ -34,7 +34,7 @@ batt() {
 brightness() {
 
   backlight() {
-    backlight="$(xbacklight -get)"
+    backlight="$(xbright $)"
     echo -e "$backlight"
   }
 
