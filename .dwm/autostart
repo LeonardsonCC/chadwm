@@ -1,6 +1,6 @@
 #!/bin/sh
 
-feh --bg-fill ~/Pictures/wall/comfy.jpg &
+feh --bg-fill ~/Wallpapers/06.jpg &
 xrdb merge ~/Public/xresources/nord/.Xresources &
 
 picom & 
